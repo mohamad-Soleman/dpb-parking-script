@@ -23,7 +23,7 @@ jobs:
         env:
           ID: ${{ secrets.CAR_ID }}
           PASSWORD: ${{ secrets.DPM_PASSWORD }}
-        run: scripts/main.sh "$ID" "$PASSWORD" > output.log 2>&1
+        run: ./scripts/main.sh "$ID" "$PASSWORD" > output.log 2>&1
 
 #      - name: Send email with results
 #        uses: dawidd6/action-send-mail@v3
