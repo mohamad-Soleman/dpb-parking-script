@@ -2,8 +2,8 @@ name: Run Parking Script
 
 on:
   schedule:
-    - cron: '0 16 * * 0,2,3'  # Runs at 16:00 UTC on Sunday, Tuesday, and Wednesday
-  workflow_dispatch:  # Allows manual execution
+    - cron: '0 16 * * 0,2,3'
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -17,13 +17,16 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y curl jq
 
       - name: Make script executable
-        run: chmod +x scripts/main.sh
+        run: |
+          chmod +x scripts/main.sh
+          cat scripts/main.sh
+          bash scripts/main.sh "33917203" "Moha506090"
 
-      - name: Run script
+#      - name: Run script
 #        env:
 #          ID: ${{ secrets.CAR_ID }}
 #          PASSWORD: ${{ secrets.DPM_PASSWORD }}
-        run: bash scripts/main.sh "33917203" "Moha506090"
+#        run: bash scripts/main.sh "33917203" "Moha506090"
 
 #      - name: Send email with results
 #        uses: dawidd6/action-send-mail@v3
