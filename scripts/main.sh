@@ -10,11 +10,9 @@ URL="https://admin.dpm-parking.com/api/app/checkLogin?userID=&ID=$ID&password=$D
 
 # Perform the login request and capture the response (headers and body)
 #RESPONSE=$(curl --insecure -H "Accept: application/json, text/plain, */*" "$URL")
-RESPONSE=$(curl -v https://www.google.com)
-RESPONSE2=$(curl --insecure https://admin.dpm-parking.com)
+RESPONSE2=$(curl --insecure --verbose https://admin.dpm-parking.com)
 
 echo "$RESPONSE"
-echo "$RESPONSE2"
 
 ## Extract the session cookie from the headers
 #SESSION_COOKIE=$(echo "$RESPONSE" | grep -i 'set-cookie:' | awk '{print $2}' | sed 's/;//')
