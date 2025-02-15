@@ -9,8 +9,7 @@ LONGITUDE="35.2921829609096"
 URL="https://admin.dpm-parking.com/api/app/checkLogin?userID=&ID=$ID&password=$DPM_KEY"
 
 # Perform the login request and capture the response (headers and body)
-#RESPONSE=$(curl --insecure -H "Accept: application/json, text/plain, */*" "$URL")
-RESPONSE2=$(curl -k --verbose --connect-timeout 10 https://admin.dpm-parking.com)
+RESPONSE=$(curl --verbose -k -H "Accept: application/json, text/plain, */*" "$URL")
 
 echo "$RESPONSE"
 
