@@ -1,0 +1,33 @@
+name: Run Parking Script
+
+on:
+  schedule:
+    - cron: '0 16 * * 0,2,3'
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make script executable
+        run: chmod +x scripts/main.sh
+
+      - name: Run script
+        run: ./scripts/main.sh ${{ secrets.CAR_ID }} ${{ secrets.DPM_PASSWORD }}> output.log 2>&1
+
+#      - name: Send email with results
+#        uses: dawidd6/action-send-mail@v3
+#        with:
+#          server_address: smtp.gmail.com  # שנה לפי הספק שלך
+#          server_port: 587
+#          username: ${{ secrets.EMAIL_USERNAME }}
+#          password: ${{ secrets.EMAIL_PASSWORD }}
+#          subject: "Parking Script Results"
+#          body: "Attached is the log from the script execution."
+#          to: your-email@example.com
+#          from: GitHub Actions
+#          attachments: output.log
