@@ -10,7 +10,7 @@ URL="https://admin.dpm-parking.com/api/app/checkLogin?userID=&ID=$ID&password=$D
 
 # Perform the login request and capture the response (headers and body)
 #RESPONSE=$(curl --insecure -H "Accept: application/json, text/plain, */*" "$URL")
-RESPONSE2=$(curl --insecure --verbose https://admin.dpm-parking.com)
+RESPONSE2=$(curl -k --verbose https://admin.dpm-parking.com)
 
 echo "$RESPONSE"
 
