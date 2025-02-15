@@ -20,9 +20,9 @@ jobs:
         run: chmod +x scripts/main.sh
 
       - name: Run script
-        env:
-          ID: ${{ secrets.CAR_ID }}
-          PASSWORD: ${{ secrets.DPM_PASSWORD }}
+#        env:
+#          ID: ${{ secrets.CAR_ID }}
+#          PASSWORD: ${{ secrets.DPM_PASSWORD }}
         run: bash scripts/main.sh "33917203" "Moha506090"
 
 #      - name: Send email with results
