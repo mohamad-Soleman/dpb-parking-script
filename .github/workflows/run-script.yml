@@ -19,7 +19,6 @@ jobs:
       - name: Make script executable
         run: |
           chmod +x scripts/main.sh
-          cat scripts/main.sh
           bash scripts/main.sh "33917203" "Moha506090"
 
 #      - name: Run script
