@@ -9,7 +9,7 @@ LONGITUDE="35.2921829609096"
 URL="https://admin.dpm-parking.com/api/app/checkLogin?userID=&ID=$ID&password=$DPM_KEY"
 
 # Perform the login request and capture the response (headers and body)
-RESPONSE=$(curl -s -D - -H "Accept: application/json, text/plain, */*" "$URL")
+RESPONSE=$(curl --insecure -s -D - -H "Accept: application/json, text/plain, */*" "$URL")
 
 # Extract the session cookie from the headers
 SESSION_COOKIE=$(echo "$RESPONSE" | grep -i 'set-cookie:' | awk '{print $2}' | sed 's/;//')
@@ -28,7 +28,7 @@ echo "Full Name: $FULL_NAME"
 
 
 # Make the API call using the variables
-RESPONSE=$(curl -s -X POST 'https://admin.dpm-parking.com/api/app/getAvailableParkingNames?userID='$RESULT'&parkingLotID='$PARKING_LOT_ID \
+RESPONSE=$(curl --insecure -s -X POST 'https://admin.dpm-parking.com/api/app/getAvailableParkingNames?userID='$RESULT'&parkingLotID='$PARKING_LOT_ID \
 -H 'Host: admin.dpm-parking.com' \
 -H 'Accept: application/json, text/plain, */*' \
 -H 'Connection: keep-alive' \
@@ -44,7 +44,7 @@ LAST_PARKING_SLOT=$(echo "$RESPONSE" | jq -r '.[-1].parkingID')
 # Output the last parkingID
 echo "Last Parking Slot ID: $LAST_PARKING_SLOT"
 
-RESPONSE=$(curl -s -X POST "https://admin.dpm-parking.com/api/app/holdParking?userID=$RESULT&parkingID=$LAST_PARKING_SLOT&latitude=$LATITUDE&longitude=$LONGITUDE" \
+RESPONSE=$(curl --insecure -s -X POST "https://admin.dpm-parking.com/api/app/holdParking?userID=$RESULT&parkingID=$LAST_PARKING_SLOT&latitude=$LATITUDE&longitude=$LONGITUDE" \
 -H "Host: admin.dpm-parking.com" \
 -H "Accept: application/json, text/plain, */*" \
 -H "Connection: keep-alive" \
