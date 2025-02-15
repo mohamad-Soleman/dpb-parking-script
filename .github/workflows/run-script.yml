@@ -2,8 +2,8 @@ name: Run Parking Script
 
 on:
   schedule:
-    - cron: '0 16 * * 0,2,3'
-  workflow_dispatch:
+    - cron: '0 16 * * 0,2,3'  # Runs at 16:00 UTC on Sunday, Tuesday, and Wednesday
+  workflow_dispatch:  # Allows manual execution
 
 jobs:
   run-script:
@@ -13,21 +13,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y curl jq
+
       - name: Make script executable
         run: chmod +x scripts/main.sh
 
       - name: Run script
-        run: ./scripts/main.sh ${{ secrets.CAR_ID }} ${{ secrets.DPM_PASSWORD }}> output.log 2>&1
+        env:
+          ID: ${{ secrets.CAR_ID }}
+          PASSWORD: ${{ secrets.DPM_PASSWORD }}
+        run: scripts/main.sh "$ID" "$PASSWORD" > output.log 2>&1
 
 #      - name: Send email with results
 #        uses: dawidd6/action-send-mail@v3
 #        with:
-#          server_address: smtp.gmail.com  # שנה לפי הספק שלך
+#          server_address: smtp.gmail.com  # Change if using another provider
 #          server_port: 587
 #          username: ${{ secrets.EMAIL_USERNAME }}
 #          password: ${{ secrets.EMAIL_PASSWORD }}
 #          subject: "Parking Script Results"
-#          body: "Attached is the log from the script execution."
-#          to: your-email@example.com
-#          from: GitHub Actions
-#          attachments: output.log
+#          body: "Attached is the lo
