@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ID="$1"
-PASSWORD="$2"
+DPM_KEY="$2"
 PARKING_LOT_ID=1775
 LATITUDE="32.868537958686304"
 LONGITUDE="35.2921829609096"
 
-URL="https://admin.dpm-parking.com/api/app/checkLogin?userID=&ID=$ID&password=$PASSWORD"
+URL="https://admin.dpm-parking.com/api/app/checkLogin?userID=&ID=$ID&password=$DPM_KEY"
 
 # Perform the login request and capture the response (headers and body)
 RESPONSE=$(curl -s -D - -H "Accept: application/json, text/plain, */*" "$URL")
